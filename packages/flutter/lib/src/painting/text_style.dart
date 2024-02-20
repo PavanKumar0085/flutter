@@ -2,16 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:ui' as ui show
-  FontFeature,
-  FontVariation,
-  ParagraphStyle,
-  Shadow,
-  StrutStyle,
-  TextHeightBehavior,
-  TextLeadingDistribution,
-  TextStyle,
-  lerpDouble;
+import 'dart:ui' as ui show FontFeature, FontVariation, ParagraphStyle, Shadow, StrutStyle, TextHeightBehavior, TextLeadingDistribution, TextStyle, lerpDouble;
 
 import 'package:flutter/foundation.dart';
 
@@ -502,12 +493,11 @@ class TextStyle with Diagnosticable {
     List<String>? fontFamilyFallback,
     String? package,
     this.overflow,
-  }) : fontFamily = package == null ? fontFamily : 'packages/$package/$fontFamily',
-       _fontFamilyFallback = fontFamilyFallback,
-       _package = package,
-       assert(color == null || foreground == null, _kColorForegroundWarning),
-       assert(backgroundColor == null || background == null, _kColorBackgroundWarning);
-
+  })  : fontFamily = package == null ? fontFamily : 'packages/$package/$fontFamily',
+        _fontFamilyFallback = fontFamilyFallback,
+        _package = package,
+        assert(color == null || foreground == null, _kColorForegroundWarning),
+        assert(backgroundColor == null || background == null, _kColorBackgroundWarning);
 
   /// Whether null values in this [TextStyle] can be replaced with their value
   /// in another [TextStyle] using [merge].
@@ -1194,40 +1184,32 @@ class TextStyle with Diagnosticable {
         ErrorDescription('The TextStyles being interpolated were:'),
         a.toDiagnosticsNode(name: 'from', style: DiagnosticsTreeStyle.singleLine),
         b.toDiagnosticsNode(name: 'to', style: DiagnosticsTreeStyle.singleLine),
-        ErrorDescription(
-          'The following fields are unspecified in both TextStyles:\n'
-          '${nullFields.map((String name) => '"$name"').join(', ')}.\n'
-          'When "inherit" changes during the transition, these fields may '
-          'observe abrupt value changes as a result, causing "jump"s in the '
-          'transition.'
-        ),
+        ErrorDescription('The following fields are unspecified in both TextStyles:\n'
+            '${nullFields.map((String name) => '"$name"').join(', ')}.\n'
+            'When "inherit" changes during the transition, these fields may '
+            'observe abrupt value changes as a result, causing "jump"s in the '
+            'transition.'),
         ErrorSpacer(),
         ErrorHint(
           'In general, TextStyle.lerp only works well when both TextStyles have '
           'the same "inherit" value, and specify the same fields.',
         ),
-        ErrorHint(
-          'If the TextStyles were directly created by you, consider bringing '
-          'them to parity to ensure a smooth transition.'
-        ),
+        ErrorHint('If the TextStyles were directly created by you, consider bringing '
+            'them to parity to ensure a smooth transition.'),
         ErrorSpacer(),
-        ErrorHint(
-          'If one of the TextStyles being lerped is significantly more elaborate '
-          'than the other, and has "inherited" set to false, it is often because '
-          'it is merged with another TextStyle before being lerped. Comparing '
-          'the "debugLabel"s of the two TextStyles may help identify if that was '
-          'the case.'
-        ),
-        ErrorHint(
-          'For example, you may see this error message when trying to lerp '
-          'between "ThemeData()" and "Theme.of(context)". This is because '
-          'TextStyles from "Theme.of(context)" are merged with TextStyles from '
-          'another theme and thus are more elaborate than the TextStyles from '
-          '"ThemeData()" (which is reflected in their "debugLabel"s -- '
-          'TextStyles from "Theme.of(context)" should have labels in the form of '
-          '"(<A TextStyle>).merge(<Another TextStyle>)"). It is recommended to '
-          'only lerp ThemeData with matching TextStyles.'
-        ),
+        ErrorHint('If one of the TextStyles being lerped is significantly more elaborate '
+            'than the other, and has "inherited" set to false, it is often because '
+            'it is merged with another TextStyle before being lerped. Comparing '
+            'the "debugLabel"s of the two TextStyles may help identify if that was '
+            'the case.'),
+        ErrorHint('For example, you may see this error message when trying to lerp '
+            'between "ThemeData()" and "Theme.of(context)". This is because '
+            'TextStyles from "Theme.of(context)" are merged with TextStyles from '
+            'another theme and thus are more elaborate than the TextStyles from '
+            '"ThemeData()" (which is reflected in their "debugLabel"s -- '
+            'TextStyles from "Theme.of(context)" should have labels in the form of '
+            '"(<A TextStyle>).merge(<Another TextStyle>)"). It is recommended to '
+            'only lerp ThemeData with matching TextStyles.'),
       ]);
     }());
 
@@ -1245,15 +1227,15 @@ class TextStyle with Diagnosticable {
       leadingDistribution: t < 0.5 ? a.leadingDistribution : b.leadingDistribution,
       locale: t < 0.5 ? a.locale : b.locale,
       foreground: (a.foreground != null || b.foreground != null)
-        ? t < 0.5
-          ? a.foreground ?? (Paint()..color = a.color!)
-          : b.foreground ?? (Paint()..color = b.color!)
-        : null,
+          ? t < 0.5
+              ? a.foreground ?? (Paint()..color = a.color!)
+              : b.foreground ?? (Paint()..color = b.color!)
+          : null,
       background: (a.background != null || b.background != null)
-        ? t < 0.5
-          ? a.background ?? (Paint()..color = a.backgroundColor!)
-          : b.background ?? (Paint()..color = b.backgroundColor!)
-        : null,
+          ? t < 0.5
+              ? a.background ?? (Paint()..color = a.backgroundColor!)
+              : b.background ?? (Paint()..color = b.backgroundColor!)
+          : null,
       shadows: t < 0.5 ? a.shadows : b.shadows,
       fontFeatures: t < 0.5 ? a.fontFeatures : b.fontFeatures,
       fontVariations: t < 0.5 ? a.fontVariations : b.fontVariations,
@@ -1342,8 +1324,7 @@ class TextStyle with Diagnosticable {
   }) {
     assert(maxLines == null || maxLines > 0);
     final ui.TextLeadingDistribution? leadingDistribution = this.leadingDistribution;
-    final ui.TextHeightBehavior? effectiveTextHeightBehavior = textHeightBehavior
-      ?? (leadingDistribution == null ? null : ui.TextHeightBehavior(leadingDistribution: leadingDistribution));
+    final ui.TextHeightBehavior? effectiveTextHeightBehavior = textHeightBehavior ?? (leadingDistribution == null ? null : ui.TextHeightBehavior(leadingDistribution: leadingDistribution));
 
     return ui.ParagraphStyle(
       textAlign: textAlign,
@@ -1356,19 +1337,21 @@ class TextStyle with Diagnosticable {
       fontSize: textScaler.scale(fontSize ?? this.fontSize ?? _kDefaultFontSize),
       height: height ?? this.height,
       textHeightBehavior: effectiveTextHeightBehavior,
-      strutStyle: strutStyle == null ? null : ui.StrutStyle(
-        fontFamily: strutStyle.fontFamily,
-        fontFamilyFallback: strutStyle.fontFamilyFallback,
-        fontSize: switch (strutStyle.fontSize) {
-          null => null,
-          final double unscaled => textScaler.scale(unscaled),
-        },
-        height: strutStyle.height,
-        leading: strutStyle.leading,
-        fontWeight: strutStyle.fontWeight,
-        fontStyle: strutStyle.fontStyle,
-        forceStrutHeight: strutStyle.forceStrutHeight,
-      ),
+      strutStyle: strutStyle == null
+          ? null
+          : ui.StrutStyle(
+              fontFamily: strutStyle.fontFamily,
+              fontFamilyFallback: strutStyle.fontFamilyFallback,
+              fontSize: switch (strutStyle.fontSize) {
+                null => null,
+                final double unscaled => textScaler.scale(unscaled),
+              },
+              height: strutStyle.height,
+              leading: strutStyle.leading,
+              fontWeight: strutStyle.fontWeight,
+              fontStyle: strutStyle.fontStyle,
+              forceStrutHeight: strutStyle.forceStrutHeight,
+            ),
       maxLines: maxLines,
       ellipsis: ellipsis,
       locale: locale,
@@ -1385,32 +1368,10 @@ class TextStyle with Diagnosticable {
     if (identical(this, other)) {
       return RenderComparison.identical;
     }
-    if (inherit != other.inherit ||
-        fontFamily != other.fontFamily ||
-        fontSize != other.fontSize ||
-        fontWeight != other.fontWeight ||
-        fontStyle != other.fontStyle ||
-        letterSpacing != other.letterSpacing ||
-        wordSpacing != other.wordSpacing ||
-        textBaseline != other.textBaseline ||
-        height != other.height ||
-        leadingDistribution != other.leadingDistribution ||
-        locale != other.locale ||
-        foreground != other.foreground ||
-        background != other.background ||
-        !listEquals(shadows, other.shadows) ||
-        !listEquals(fontFeatures, other.fontFeatures) ||
-        !listEquals(fontVariations, other.fontVariations) ||
-        !listEquals(fontFamilyFallback, other.fontFamilyFallback) ||
-        overflow != other.overflow) {
+    if (inherit != other.inherit || fontFamily != other.fontFamily || fontSize != other.fontSize || fontWeight != other.fontWeight || fontStyle != other.fontStyle || letterSpacing != other.letterSpacing || wordSpacing != other.wordSpacing || textBaseline != other.textBaseline || height != other.height || leadingDistribution != other.leadingDistribution || locale != other.locale || foreground != other.foreground || background != other.background || !listEquals(shadows, other.shadows) || !listEquals(fontFeatures, other.fontFeatures) || !listEquals(fontVariations, other.fontVariations) || !listEquals(fontFamilyFallback, other.fontFamilyFallback) || overflow != other.overflow) {
       return RenderComparison.layout;
     }
-    if (color != other.color ||
-        backgroundColor != other.backgroundColor ||
-        decoration != other.decoration ||
-        decorationColor != other.decorationColor ||
-        decorationStyle != other.decorationStyle ||
-        decorationThickness != other.decorationThickness) {
+    if (color != other.color || backgroundColor != other.backgroundColor || decoration != other.decoration || decorationColor != other.decorationColor || decorationStyle != other.decorationStyle || decorationThickness != other.decorationThickness) {
       return RenderComparison.paint;
     }
     return RenderComparison.identical;
@@ -1424,32 +1385,7 @@ class TextStyle with Diagnosticable {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is TextStyle
-        && other.inherit == inherit
-        && other.color == color
-        && other.backgroundColor == backgroundColor
-        && other.fontSize == fontSize
-        && other.fontWeight == fontWeight
-        && other.fontStyle == fontStyle
-        && other.letterSpacing == letterSpacing
-        && other.wordSpacing == wordSpacing
-        && other.textBaseline == textBaseline
-        && other.height == height
-        && other.leadingDistribution == leadingDistribution
-        && other.locale == locale
-        && other.foreground == foreground
-        && other.background == background
-        && listEquals(other.shadows, shadows)
-        && listEquals(other.fontFeatures, fontFeatures)
-        && listEquals(other.fontVariations, fontVariations)
-        && other.decoration == decoration
-        && other.decorationColor == decorationColor
-        && other.decorationStyle == decorationStyle
-        && other.decorationThickness == decorationThickness
-        && other.fontFamily == fontFamily
-        && listEquals(other.fontFamilyFallback, fontFamilyFallback)
-        && other._package == _package
-        && other.overflow == overflow;
+    return other is TextStyle && other.inherit == inherit && other.color == color && other.backgroundColor == backgroundColor && other.fontSize == fontSize && other.fontWeight == fontWeight && other.fontStyle == fontStyle && other.letterSpacing == letterSpacing && other.wordSpacing == wordSpacing && other.textBaseline == textBaseline && other.height == height && other.leadingDistribution == leadingDistribution && other.locale == locale && other.foreground == foreground && other.background == background && listEquals(other.shadows, shadows) && listEquals(other.fontFeatures, fontFeatures) && listEquals(other.fontVariations, fontVariations) && other.decoration == decoration && other.decorationColor == decorationColor && other.decorationStyle == decorationStyle && other.decorationThickness == decorationThickness && other.fontFamily == fontFamily && listEquals(other.fontFamilyFallback, fontFamilyFallback) && other._package == _package && other.overflow == overflow;
   }
 
   @override
@@ -1496,7 +1432,7 @@ class TextStyle with Diagnosticable {
 
   /// Adds all properties prefixing property names with the optional `prefix`.
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties, { String prefix = '' }) {
+  void debugFillProperties(DiagnosticPropertiesBuilder properties, {String prefix = ''}) {
     super.debugFillProperties(properties);
     if (debugLabel != null) {
       properties.add(MessageProperty('${prefix}debugLabel', debugLabel!));
